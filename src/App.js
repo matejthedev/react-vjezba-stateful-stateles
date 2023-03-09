@@ -1,25 +1,38 @@
-import logo from './logo.svg';
 import './App.css';
+import { Component } from 'react';
+import Kompa from './components/Kompa';
+import KlasnaKompa from './components/KlasnaKompa';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "Marko",
+      age: 33,
+      count: 0,
+      color: "black"
+    }
+  };
+
+  handleClick = () => {
+    this.setState({count: this.state.count + 1})
+    if (this.state.count === 5) {
+      this.setState({color: "green"})
+    }
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <h1 style={{ color: this.state.color }}>React Aplikacija</h1>
+        <Kompa greet="hello" num={7} nick="Matt"/>
+        <Kompa greet="pozdrav" num={10} nick="Nesto drugo"/>
+        <Kompa greet={this.state.name} num={this.state.age} nick="Nesto trece"/>
+        <KlasnaKompa />
+       <h2>Brojac: {this.state.count}</h2>
+       <button onClick={this.handleClick}>Up</button>
+      </div>
+  )};
 }
 
 export default App;
